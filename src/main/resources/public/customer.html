@@ -1,0 +1,566 @@
+Night
+a1to.
+ไม่อยู่
+
+Night — 21/6/65 21:17
+https://discord.gg/Q5mShuAE
+อะๆ
+copy วางนะ
+Night — 5/7/65 21:14
+A2TOosama
+Rsv21327
+ชื่อ A1TO#R4Z3
+Night — 5/7/65 21:24
+ลองเข้าใหม่ๆ
+ฮาเข้าได้นะ
+ทำไมมันเข้าบะได้
+มันขึ้นว่าหยัง
+ปู่สังกระสาย่าสังกระสี — 5/7/65 21:27
+เข้าไปแล้วมันค้า
+ค้าง
+Night — 5/7/65 21:27
+รีคอมยัง
+Night — 5/7/68 13:20
+ddd
+ปู่สังกระสาย่าสังกระสี — 5/7/68 13:20
+package com.example
+
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.*
+import io.ktor.server.request.receive
+import io.ktor.server.response.*
+ขยาย
+New2.txt
+4 KB
+ปู่สังกระสาย่าสังกระสี — 14:02
+ส่งต่อแล้ว
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบจัดการลูกค้า - Customer Management</title>
+ขยาย
+customer.html
+20 KB
+﻿
+ปู่สังกระสาย่าสังกระสี
+fiatkanomwan
+ 
+ 
+ 
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบจัดการลูกค้า - Customer Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .form-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-delete {
+            background: linear-gradient(45deg, #f44336, #d32f2f);
+            padding: 8px 16px;
+            font-size: 14px;
+            box-shadow: 0 5px 15px rgba(244, 67, 54, 0.3);
+        }
+
+        .btn-delete:hover {
+            box-shadow: 0 8px 25px rgba(244, 67, 54, 0.4);
+        }
+
+        .customers-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .customers-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .refresh-btn {
+            padding: 8px 16px;
+            font-size: 14px;
+            margin-left: auto;
+        }
+
+        .customer-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .customer-table th {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .customer-table td {
+            padding: 15px 12px;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .customer-table tr:hover {
+            background-color: #f5f5f5;
+            transform: scale(1.01);
+            transition: all 0.2s ease;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #f44336;
+        }
+
+        .success {
+            background: #e8f5e8;
+            color: #2e7d2e;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #4CAF50;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 ระบบจัดการลูกค้า</h1>
+            <p>Customer Management System</p>
+        </div>
+
+        <div class="main-content">
+            <div class="form-section">
+                <h2>📝 เพิ่มลูกค้าใหม่</h2>
+                <form id="customerForm">
+                    <div class="form-group">
+                        <label for="fullname">ชื่อ-นามสกุล (Full Name):</label>
+                        <input type="text" id="fullname" name="fullname" required 
+                               placeholder="เช่น สมหญิง รักไทย">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">ที่อยู่ (Address):</label>
+                        <input type="text" id="address" name="address" required 
+                               placeholder="เช่น 123 ถนนห้วยขวาง, ช้างเผือก, เมืองเชียงใหม่, 50300">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">อีเมล (Email):</label>
+                        <input type="email" id="email" name="email" required 
+                               placeholder="เช่น somYinh.r@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tel">เบอร์โทรศัพท์ (Phone):</label>
+                        <input type="tel" id="tel" name="tel" required 
+                               placeholder="เช่น 081-987-5678">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthday">วันเกิด (Birthday):</label>
+                        <input type="date" id="birthday" name="birthday" required>
+                    </div>
+
+                    <button type="submit" class="btn">✅ เพิ่มลูกค้า</button>
+                </form>
+
+                <div id="message"></div>
+            </div>
+
+            <div class="customers-section">
+                <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
+                    <h2 style="margin: 0;">👥 รายการลูกค้า</h2>
+                    <button class="btn refresh-btn" onclick="loadCustomers()">🔄 รีเฟรช</button>
+                </div>
+                
+                <div class="search-section" style="margin-bottom: 20px;">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="text" id="searchInput" placeholder="🔍 ค้นหาตามชื่อ (เช่น John, สมหญิง)" 
+                               style="flex: 1; padding: 12px 15px; border: 2px solid #e1e5e9; border-radius: 25px; font-size: 16px;">
+                        <button class="btn" onclick="searchCustomers()" style="padding: 12px 20px;">🔍 ค้นหา</button>
+                        <button class="btn" onclick="clearSearch()" style="background: #6c757d; padding: 12px 20px;">❌ ล้าง</button>
+                    </div>
+                </div>
+                
+                <div id="customersContainer">
+                    <div class="loading">กำลังโหลดข้อมูล...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8080';
+
+        // Handle Enter key in search input
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchCustomers();
+            }
+        });
+
+        // Load customers when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCustomers();
+        });
+
+        // Handle form submission
+        document.getElementById('customerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const customerData = {
+                fullname: formData.get('fullname'),
+                address: formData.get('address'),
+                email: formData.get('email'),
+                tel: formData.get('tel'),
+                birthday: formatDateForAPI(formData.get('birthday'))
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/customers`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(customerData)
+                });
+
+                if (response.ok) {
+                    showMessage('เพิ่มลูกค้าเรียบร้อยแล้ว! 🎉', 'success');
+                    e.target.reset();
+                    loadCustomers(); // Reload the customer list
+                } else {
+                    throw new Error('Failed to add customer');
+                }
+            } catch (error) {
+                console.error('Error adding customer:', error);
+                showMessage('เกิดข้อผิดพลาดในการเพิ่มลูกค้า กรุณาตรวจสอบการเชื่อมต่อกับ Spring Boot server', 'error');
+            }
+        });
+
+        // Search customers by name
+        async function searchCustomers() {
+            const searchTerm = document.getElementById('searchInput').value.trim();
+            
+            if (!searchTerm) {
+                showMessage('กรุณาใส่ชื่อที่ต้องการค้นหา', 'error');
+                return;
+            }
+
+            const container = document.getElementById('customersContainer');
+            container.innerHTML = '<div class="loading">🔍 กำลังค้นหา...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/customers/name/${encodeURIComponent(searchTerm)}`);
+                
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        container.innerHTML = '<div class="loading">ไม่พบลูกค้าที่ค้นหา</div>';
+                        return;
+                    }
+                    throw new Error('Failed to search customers');
+                }
+
+                const customers = await response.json();
+                
+                // Handle single customer response (convert to array for consistent display)
+                const customerArray = Array.isArray(customers) ? customers : [customers];
+                
+                displayCustomers(customerArray);
+                showMessage(`พบลูกค้า ${customerArray.length} คน 🎉`, 'success');
+                
+            } catch (error) {
+                console.error('Error searching customers:', error);
+                container.innerHTML = `
+                    <div class="error">
+                        ไม่สามารถค้นหาลูกค้าได้<br>
+                        กรุณาตรวจสอบว่า Spring Boot server ทำงานที่ localhost:8080
+                    </div>
+                `;
+                showMessage('เกิดข้อผิดพลาดในการค้นหา', 'error');
+            }
+        }
+
+        // Clear search and reload all customers
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            loadCustomers();
+            showMessage('ล้างการค้นหาแล้ว กำลังแสดงลูกค้าทั้งหมด', 'success');
+        }
+
+        // Load customers from API
+        async function loadCustomers() {
+            const container = document.getElementById('customersContainer');
+            container.innerHTML = '<div class="loading">กำลังโหลดข้อมูล...</div>';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/customers`);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch customers');
+                }
+
+                const customers = await response.json();
+                displayCustomers(customers);
+            } catch (error) {
+                console.error('Error loading customers:', error);
+                container.innerHTML = `
+                    <div class="error">
+                        ไม่สามารถโหลดข้อมูลลูกค้าได้<br>
+                        กรุณาตรวจสอบว่า Spring Boot server ทำงานที่ localhost:8080
+                    </div>
+                `;
+            }
+        }
+
+        // Display customers in table
+        function displayCustomers(customers) {
+            const container = document.getElementById('customersContainer');
+            
+            if (customers.length === 0) {
+                container.innerHTML = '<div class="loading">ยังไม่มีข้อมูลลูกค้า</div>';
+                return;
+            }
+
+            const table = `
+                <table class="customer-table fade-in">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>ชื่อ-นามสกุล</th>
+                            <th>อีเมล</th>
+                            <th>เบอร์โทร</th>
+                            <th>วันเกิด</th>
+                            <th>การดำเนินการ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${customers.map(customer => `
+                            <tr>
+                                <td>${customer.id || 'N/A'}</td>
+                                <td>${customer.fullname}</td>
+                                <td>${customer.email}</td>
+                                <td>${customer.tel}</td>
+                                <td>${formatDateDisplay(customer.birthday)}</td>
+                                <td>
+                                    <button class="btn btn-delete" onclick="deleteCustomer(${customer.id})">
+                                        🗑️ ลบ
+                                    </button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+            
+            container.innerHTML = table;
+        }
+
+        // Delete customer
+        async function deleteCustomer(customerId) {
+            if (!confirm('คุณแน่ใจหรือไม่ที่จะลบลูกค้ารายนี้?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/customers/${customerId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    showMessage('ลบลูกค้าเรียบร้อยแล้ว! ✅', 'success');
+                    loadCustomers(); // Reload the customer list
+                } else {
+                    throw new Error('Failed to delete customer');
+                }
+            } catch (error) {
+                console.error('Error deleting customer:', error);
+                showMessage('เกิดข้อผิดพลาดในการลบลูกค้า', 'error');
+            }
+        }
+
+        // Show message to user
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerHTML = `<div class="${type} fade-in">${message}</div>`;
+            
+            // Clear message after 5 seconds
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        // Format date for API (DD-MM-YYYY)
+        function formatDateForAPI(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}-${month}-${year}`;
+        }
+
+        // Format date for display
+        function formatDateDisplay(dateString) {
+            if (!dateString) return 'N/A';
+            // If it's already in DD-MM-YYYY format, return as is
+            if (dateString.includes('-') && dateString.split('-')[0].length === 2) {
+                return dateString;
+            }
+            // Otherwise, try to format it
+            try {
+                const date = new Date(dateString);
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const year = date.getFullYear();
+                return `${day}-${month}-${year}`;
+            } catch (error) {
+                return dateString;
+            }
+        }
+    </script>
+</body>
+</html>
+customer.html
+20 KB
