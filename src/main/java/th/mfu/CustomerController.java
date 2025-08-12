@@ -24,6 +24,10 @@ public class CustomerController {
     @Autowired
     private CustomerRepository custRepo;
 
+    @Autowired
+    private CustomerTierRepository tierRepo;
+
+
     // GET for a customer
     @GetMapping("/customers/{id}")
     public ResponseEntity<Customer> getCustomer(@PathVariable Long id){
@@ -49,6 +53,13 @@ public class CustomerController {
     // POST for creating a customer
     @PostMapping("/customers")
     public ResponseEntity<String> createCustomer(@RequestBody Customer customer){
+        if(customer.getCustomerTier()!=null && customer.getCustomerTier().getId()==null){
+            Optional<CustomerTier> tierOpt = tierRepo.findById(customer.getCustomerTier().getId());
+            if(tierOpt.isPresent())
+                customer.setCustomerTier(tierOpt.get());
+            else
+                return new ResponseEntity<String>("Customer tier not found", HttpStatus.BAD_REQUEST);
+        }
         custRepo.save(customer);
         return new ResponseEntity<String>("Customer created", HttpStatus.CREATED);
     }
